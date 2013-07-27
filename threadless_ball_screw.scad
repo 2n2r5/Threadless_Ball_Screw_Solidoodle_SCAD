@@ -76,7 +76,7 @@ mhfc= [
 /* [Bearing Spec] */
 
 //Bearing Outer Diameter
-bod = 16 ;
+bod = 14 ;
 
 //Bearing Inner Diameter and Screw hole size
 bid = 5 ;
@@ -95,7 +95,10 @@ rotAdj = 50;
 /* [Steps Per MM] */
 
 //Smooth Rod Diameter
-srd = 9.525 ; //[3/8,9.525:5/16,7.9375:1/4,6.35:3:5:6:8:10:12]
+srd = 6 ; //[3/8,9.525:5/16,7.9375:1/4,6.35:3:5:6:8:10:12]
+
+//Bed Hole Size (if left the same size at smoot rod diameter, the fit tends to be too snug)
+bhs = 9;
 
 //Desired steps/mm
 pitch = 2 ;
@@ -185,8 +188,8 @@ module Base(){
 					
 				}
 			//Hole for smooth rod
-			#cylinder(r=(srd/2)*1.0,h=100,center=true);
-
+			%cylinder(r=(srd/2)*1.0,h=100,center=true);
+			cylinder(r=bhs/2, h=bh,center=true );
 
 			}
 		}
@@ -212,5 +215,6 @@ module bearingMounts(){
 // Module output and formatting here
 difference(){
 Base();
+
 bearingMounts();
 }
